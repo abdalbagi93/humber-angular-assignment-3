@@ -1,7 +1,22 @@
 [
-    { "orderNumber": "1234567890", "total": "$150" },
-    { "orderNumber": "0987654321", "total": "$390" },
-    { "orderNumber": "3294873243", "total": "$290" },
-    { "orderNumber": "2938908343", "total": "$990" },
-    { "orderNumber": "9320489834", "total": "$390" }
+    {
+        "orderNumber": "1234567890",
+        "total": "$150"
+    },
+    {
+        "orderNumber": "0987654321",
+        "total": "$390"
+    },
+    {
+        "orderNumber": "3294873243",
+        "total": "$290"
+    },
+    {
+        "orderNumber": "2938908343",
+        "total": "$990"
+    },
+    {
+        "orderNumber": "9320489834",
+        "total": "$390"
+    }
 ]

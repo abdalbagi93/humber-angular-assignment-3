@@ -21,6 +21,13 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { NumbersonlyDirective } from './components/numbersonly-directive/numbersonly.directive';
+import { TwodigitnumberDirective } from './components/twoDigitNumber-directive/twodigitnumber.directive';
+import { FourdigitnumberDirective } from './components/fourDigitNumber-directive/fourdigitnumber.directive';
+import { DataStoreService } from './services/data-store.service';
+import { ProductsService } from './services/products.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +41,11 @@ import { DatePipe } from '@angular/common';
     NavBarComponent,
     ItemComponent,
     CartItemComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    CheckoutComponent,
+    NumbersonlyDirective,
+    TwodigitnumberDirective,
+    FourdigitnumberDirective
   ],
   imports: [
     BrowserModule,
@@ -44,9 +55,10 @@ import { DatePipe } from '@angular/common';
     NoopAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, DataStoreService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

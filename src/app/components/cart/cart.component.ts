@@ -10,10 +10,19 @@ import { DataStoreService } from 'src/app/services/data-store.service';
 })
 export class CartComponent implements OnInit {
   cartItems$!: Observable<ProductData[]>;
+  isCardEmpty: boolean = true;
   constructor(private dataStore: DataStoreService) { }
 
   ngOnInit(): void {
     this.cartItems$ = this.dataStore.cartItems$;
+    this.dataStore.cartItems$.subscribe((data) => {
+      if (data.length === 0) {
+        this.isCardEmpty = true;
+      }
+      else {
+        this.isCardEmpty = false;
+      }
+    })
   }
 
   clearCart() {

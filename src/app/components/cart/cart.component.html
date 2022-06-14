@@ -1,4 +1,3 @@
-
 <div *ngIf="(cartItems$ | async)?.length" class="container">
     <cart-item *ngFor="let item of (cartItems$ | async)" [item]="item"></cart-item>
 </div>
@@ -9,5 +8,5 @@
 
 <div class="button-container">
     <button mat-button (click)="clearCart()">Clear Cart</button>
-    <button class="checkout" mat-button>Checkout</button>
-  </div>
+    <button [disabled]="isCardEmpty" class="checkout" mat-button routerLink="/checkout">Checkout</button>
+</div>

@@ -1,0 +1,129 @@
+<h1 class="text-align-center margin-y-30">Checkout</h1>
+
+<h1 class="text-align-center" *ngIf="isSubmitted===true">Thank you for your order. Your order has been initiated!</h1>
+<h3 *ngIf="isSubmitted===false" class="text-align-center margin-y-30 total-bill">Your total bill is {{totalBill}}$</h3>
+<form *ngIf="isSubmitted===false" class="check_form" (ngSubmit)="submitCheckout()" [formGroup]="checkoutForm">
+    <fieldset *ngIf="sessionDataAvailable">
+        <div class="text-align-center">
+            <button (click)="bringExistingData()" type="button">Use Existing Data</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <input id="fName" type="text" formControlName="fName">
+        <label for="fName">First Name</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                first name</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <input id="lName" type="text" formControlName="lName">
+        <label for="lName">Last Name</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                last name</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <input id="address" type="text" formControlName="address">
+        <label for="address">Address</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                address</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <input id="city" type="text" formControlName="city">
+        <label for="city">City</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                city</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <input id="postal_code" type="text" formControlName="postal_code">
+        <label for="postal_code">Postal Code</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                postal code</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <select formControlName="check_country" id="check_country">
+            <option value="canada">Canada</option>
+            <option value="united states">United States</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <select formControlName="payment_method" id="payment_method">
+            <option value="visa">VISA</option>
+            <option value="mastercard">Mastercard</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <input numbersonly id="cc_number" type="number" formControlName="cc_number">
+        <label for="cc_number">Credit Card Number</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter the
+                Credit card number</span>
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['max']">Max length of credit
+                card number should be 16</span>
+        </div>
+    </fieldset>
+
+    <div class="card-detail-container">
+        <fieldset>
+            <div class="card_expiration_container">
+                <input numbersonly type="number" formControlName="card_exp_month" step="1" placeholder="MM"
+                    (input)="cardMonthHandler($event)" />
+                <div class="margin-top-10px">
+                    /
+                </div>
+                <input numbersonly type="number" formControlName="card_exp_year" step="1" placeholder="YYYY"
+                    (input)="cardYearHandler($event)" />
+            </div>
+            <div *ngIf="!checkoutForm.get('card_exp_month').valid && checkoutForm.get('card_exp_month').touched">
+                <span class="error-message-form" *ngIf="checkoutForm.get('card_exp_month').errors['max']">please enter a
+                    valid month</span>
+                <span class="error-message-form" *ngIf="checkoutForm.get('card_exp_month').errors['min']">please enter a
+                    valid month</span>
+            </div>
+
+            <div *ngIf="!checkoutForm.get('card_exp_year').valid && checkoutForm.get('card_exp_year').touched">
+                <span class="error-message-form" *ngIf="checkoutForm.get('card_exp_year').errors['min']">Please enter a
+                    valid year</span>
+                <span class="error-message-form" *ngIf="checkoutForm.get('card_exp_year').errors['max']">Please enter a
+                    valid year</span>
+            </div>
+        </fieldset>
+        <fieldset>
+            <input numbersonly id="cvc_number" type="number" formControlName="cvc_number">
+            <label for="cvc_number">CVC Number</label>
+            <div class="after"></div>
+            <div *ngIf="!checkoutForm.get('cvc_number').valid && checkoutForm.get('cvc_number').touched">
+                <span class="error-message-form" *ngIf="checkoutForm.get('cvc_number').errors['max']">Please enter a
+                    valid CVC value</span>
+            </div>
+        </fieldset>
+    </div>
+    <fieldset>
+        <input id="cName" type="text" formControlName="cName">
+        <label for="cName">Name on Card</label>
+        <div class="after"></div>
+        <div *ngIf="!checkoutForm.get('cc_number').valid && checkoutForm.get('cc_number').touched">
+            <span class="error-message-form" *ngIf="checkoutForm.get('cc_number').errors['required']">Please enter your
+                card name</span>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="text-align-center">
+            <button type="submit" [disabled]="!checkoutForm.valid">Submit</button>
+        </div>
+    </fieldset>
+</form>
